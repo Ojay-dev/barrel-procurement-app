@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "item": "Laptop",
+    "itemCost": 1000,
+    "quantity": 10,
+    "paymentStatus": "unpaid",
+    "status": "pending",
+    "customerName": "Ajayi Crowder",
+    "customerAddress": "123 Main St"
+  },
+  {
+    "id": "2",
+    "item": "Phone",
+    "itemCost": 500,
+    "quantity": 5,
+    "paymentStatus": "paid",
+    "status": "shipped",
+    "customerName": "John Doe",
+    "customerAddress": "456 Main St"
+  }
+]
