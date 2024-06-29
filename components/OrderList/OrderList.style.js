@@ -7,7 +7,7 @@ export const OrderListContainer = styled.div`
   padding: 1rem 2rem;
   border: 1px solid #d9d9d9;
   overflow-x: auto;
-  min-height: 30vh;
+  min-height: 50vh;
 
   h3 {
     font-size: 1.25rem;
@@ -44,7 +44,7 @@ export const OrderListTable = styled.table`
 
   td {
     padding: 1.5rem;
-    // border-bottom: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
 
     &:last-child {
       position: relative;
@@ -56,6 +56,10 @@ export const OrderListTable = styled.table`
       cursor: pointer;
       padding: 0.5rem;
     }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
   }
 `;
 
@@ -72,7 +76,7 @@ export const StatusTag = styled.span`
 export const HamburgerMenu = styled.div`
   position: absolute;
   top: 38px;
-  left: -73px;
+  left: -60px;
   background: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -87,15 +91,22 @@ export const HamburgerMenu = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    width: 100px;
 
     li {
       padding: 8px 12px;
       cursor: pointer;
       width: 100%;
       text-align: left;
+      border-radius: 4px;
 
       &:hover {
         background: #f0f0f0;
+      }
+
+      &:last-child:hover {
+        background: #e60424de;
+        color: white;
       }
     }
   }

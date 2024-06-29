@@ -1,14 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { HamburgerMenu, OrderListContainer, OrderListTable, StatusTag } from "./OrderList.style";
+import { handleDeleteOrder } from "@/utils/func";
 import { Hamburger } from "@/assets/svg";
-import Image from "next/image";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import axios from "axios";
 
 const OrderList = () => {
+  const router = useRouter();
+  const menuRef = useRef(null);
   const [menuVisible, setMenuVisible] = useState(false);
   const [activeOrder, setActiveOrder] = useState(null);
-  const menuRef = useRef(null);
-  const router = useRouter();
+
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const toggleMenu = (orderId) => {
     setActiveOrder(orderId);
@@ -33,6 +39,22 @@ const OrderList = () => {
     };
   }, [menuVisible]);
 
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get("/api/orders");
+      console.log("response data: ", response.data);
+      setOrders(response.data);
+    } catch (error) {
+      setError(error.message || "An error occurred while fetching orders");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <OrderListContainer>
       <h3>Order List</h3>
@@ -42,6 +64,7 @@ const OrderList = () => {
           <tr>
             <th>Order ID</th>
             <th>Customer</th>
+            <th>item</th>
             <th>Quantity</th>
             <th>Payment Status</th>
             <th>Status</th>
@@ -49,35 +72,40 @@ const OrderList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>#1</td>
-            <td>#Ajayi Crowder</td>
-            <td>Coke</td>
-            <td>4</td>
-            <td>
-              <StatusTag>Pending</StatusTag>
-            </td>
-            <td>
-              <button onClick={() => toggleMenu(1)}>
-                <Image src={Hamburger} alt="menu icon" />
-              </button>
-              {menuVisible && activeOrder === 1 && (
-                <HamburgerMenu ref={menuRef}>
-                  <ul>
-                    <li
-                      onClick={() => {
-                        router.push(`/order/${activeOrder}`);
-                      }}
-                    >
-                      View Details
-                    </li>
-                    <li>Edit Order</li>
-                    <li>Cancel Order</li>
-                  </ul>
-                </HamburgerMenu>
-              )}
-            </td>
-          </tr>
+          {orders.map((order) => (
+            <tr key={order.id}>
+              <td>#{order.id}</td>
+              <td>{order.customerName}</td>
+              <td>{order.item}</td>
+              <td>{order.quantity}</td>
+              <td>
+                <StatusTag>{order.paymentStatus}</StatusTag>
+              </td>
+              <td>
+                <StatusTag>{order.status}</StatusTag>
+              </td>
+              <td>
+                <button onClick={() => toggleMenu(order.id)}>
+                  <Image src={Hamburger} alt="menu icon" />
+                </button>
+                {menuVisible && activeOrder === order.id && (
+                  <HamburgerMenu ref={menuRef}>
+                    <ul>
+                      <li
+                        onClick={() => {
+                          router.push(`/order/${activeOrder}`);
+                        }}
+                      >
+                        View
+                      </li>
+                      <li>Edit </li>
+                      <li onClick={() => handleDeleteOrder(activeOrder)}>Delete</li>
+                    </ul>
+                  </HamburgerMenu>
+                )}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </OrderListTable>
     </OrderListContainer>

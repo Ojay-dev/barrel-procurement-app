@@ -18,16 +18,16 @@ export const OrderDetailContainer = styled.form`
 
   .detail-group {
     display: grid;
-    row-gap: 8px;
+    row-gap: 4px;
     margin-bottom: 28px;
 
     &__value {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
     }
 
     &__label {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 500;
       color: #7d7c7c;
     }
@@ -62,7 +62,7 @@ export const OrderDetailContainer = styled.form`
       font-size: 16px;
       font-weight: 500;
       padding: 0.75rem 3rem;
-      border: 2px solid #2e2659;
+      border: 1px solid #2e2659;
       border-radius: 0.75rem;
       margin-right: 1rem;
       cursor: pointer;
@@ -74,7 +74,7 @@ export const OrderDetailContainer = styled.form`
       font-size: 16px;
       font-weight: 500;
       padding: 0.75rem 3rem;
-      border: 2px solid #e30f0f;
+      border: 1px solid #e30f0f;
       border-radius: 0.75rem;
       cursor: pointer;
     }
