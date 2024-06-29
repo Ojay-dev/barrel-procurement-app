@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const OrderDetailContainer = styled.form`
+  position: relative;
   background-color: #fff;
   max-width: 626px;
   margin: 3.5rem auto;
   margin-bottom: 4rem;
+  min-height: 70vh;
 
   padding: 1rem 2.5rem 3rem;
   border-radius: 1rem;
@@ -79,4 +81,11 @@ export const OrderDetailContainer = styled.form`
       cursor: pointer;
     }
   }
+`;
+
+export const Spinner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

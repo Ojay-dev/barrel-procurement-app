@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OrderFormContainer } from "./OrderForm.style";
 import { useRouter } from "next/router";
 import axios from "axios";
 
 function OrderForm() {
   const router = useRouter();
+  const orderId = router?.query?.id;
 
   const [formData, setFormData] = useState({
     item: "",
@@ -19,6 +20,27 @@ function OrderForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    if (orderId) {
+      fetchOrder();
+    }
+  }, [orderId]);
+
+  const fetchOrder = async () => {
+    try {
+      const response = await axios.get(`/api/orders/${orderId}`);
+      setFormData((prevData) => ({
+        ...prevData,
+        ...response.data,
+      }));
+    } catch (error) {
+      console.log("error.message: ", error.message);
+      setError(error.message || "An error occurred while fetching order details");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -32,10 +54,27 @@ function OrderForm() {
     setLoading(true);
     setError(null);
 
+    const { item, customerName, customerAddress, quantity, itemCost, paymentStatus, status } = formData;
+
+    const payload = {
+      item,
+      customerName,
+      customerAddress,
+      quantity,
+      itemCost,
+      paymentStatus,
+      status,
+    };
+
     try {
-      await axios.post("/api/orders", formData);
-      window.alert("Order created successfully");
-      router.push("/"); // Redirect to the orders list or another relevant page
+      if (!orderId) {
+        await axios.post("/api/orders", payload);
+        window.alert("Order created!");
+      } else {
+        await axios.put(`/api/orders/${orderId}`, payload);
+        window.alert("Order updated!");
+      }
+      router.push("/");
     } catch (err) {
       setError(err.message || "An error occurred while creating the order");
     } finally {

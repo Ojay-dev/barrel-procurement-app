@@ -47,7 +47,7 @@ export const OrderFormContainer = styled.form`
       font-size: 16px;
       font-weight: 500;
       padding: 0.75rem 3rem;
-      border: 2px solid #2e2659;
+      border: 1px solid #2e2659;
       border-radius: 0.75rem;
       margin-right: 1rem;
       cursor: pointer;

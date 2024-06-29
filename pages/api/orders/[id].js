@@ -4,8 +4,6 @@ import { readOrdersFile, writeOrdersFile } from "@/utils/api-middleware";
 const getOrder = async (req, res) => {
   const { id } = req.query;
 
-  console.log("orderId: ", id);
-
   const orders = await readOrdersFile();
   const order = orders.find((order) => parseInt(order.id) === parseInt(id));
   if (order) {

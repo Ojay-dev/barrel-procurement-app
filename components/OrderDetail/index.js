@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { OrderDetailContainer } from "./OrderDetail.style";
+import { OrderDetailContainer, Spinner } from "./OrderDetail.style";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
 function OrderDetail() {
   const router = useRouter();
@@ -19,9 +20,7 @@ function OrderDetail() {
 
   const fetchOrder = async () => {
     try {
-      console.log("trying to fetch");
       const response = await axios.get(`/api/orders/${orderId}`);
-      console.log("response: ", response);
       setOrder(response.data);
     } catch (error) {
       console.log("error.message: ", error.message);
@@ -49,62 +48,79 @@ function OrderDetail() {
     <OrderDetailContainer>
       <h2>Order Summary</h2>
 
-      <div className="detail-group">
-        <div className="detail-group__value">Order ID #{order?.id}</div>
-        <div className="detail-group__label">Date created: 18/08/2024</div>
-      </div>
+      {loading ? (
+        <Spinner>
+          <ThreeDots
+            visible={true}
+            height="80"
+            width="80"
+            color="#2e2659"
+            radius="9"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </Spinner>
+      ) : (
+        <>
+          <div className="detail-group">
+            <div className="detail-group__value">Order ID #{order?.id}</div>
+            <div className="detail-group__label">Date created: 18/08/2024</div>
+          </div>
 
-      <hr className="detail-group-hr" />
+          <hr className="detail-group-hr" />
 
-      <div className="detail-group">
-        <div className="detail-group__label">Customer Name</div>
-        <div className="detail-group__value">{order?.customerName}</div>
-      </div>
+          <div className="detail-group">
+            <div className="detail-group__label">Customer Name</div>
+            <div className="detail-group__value">{order?.customerName}</div>
+          </div>
 
-      <div className="detail-group">
-        <div className="detail-group__label">Phone number</div>
-        <div className="detail-group__value">(+234) 809 234 4569</div>
-      </div>
+          <div className="detail-group">
+            <div className="detail-group__label">Phone number</div>
+            <div className="detail-group__value">(+234) 809 234 4569</div>
+          </div>
 
-      <div className="detail-group">
-        <div className="detail-group__label">Address</div>
-        <div className="detail-group__value">{order?.customerAddress}</div>
-      </div>
+          <div className="detail-group">
+            <div className="detail-group__label">Address</div>
+            <div className="detail-group__value">{order?.customerAddress}</div>
+          </div>
 
-      <hr className="detail-group-hr" />
+          <hr className="detail-group-hr" />
 
-      <div className="detail-group-summary">
-        <div className="detail-group">
-          <div className="detail-group__label">Item</div>
-          <div className="detail-group__value">{order?.item}</div>
-        </div>
+          <div className="detail-group-summary">
+            <div className="detail-group">
+              <div className="detail-group__label">Item</div>
+              <div className="detail-group__value">{order?.item}</div>
+            </div>
 
-        <div className="detail-group__value">{order?.itemCost}</div>
-      </div>
+            <div className="detail-group__value">{order?.itemCost}</div>
+          </div>
 
-      <div className="detail-group-summary">
-        <div className="detail-group">
-          <div className="detail-group__label">Total</div>
-          <div className="detail-group__value">{order?.quantity} Item(s)</div>
-        </div>
+          <div className="detail-group-summary">
+            <div className="detail-group">
+              <div className="detail-group__label">Total</div>
+              <div className="detail-group__value">{order?.quantity} Item(s)</div>
+            </div>
 
-        <div className="detail-group__value">N{order?.itemCost * order?.quantity}</div>
-      </div>
+            <div className="detail-group__value">N{order?.itemCost * order?.quantity}</div>
+          </div>
 
-      <div className="cta">
-        <button
-          type="button"
-          className="cta__cancel-btn"
-          onClick={() => {
-            router.back();
-          }}
-        >
-          Cancel
-        </button>
-        <button type="submit" className="cta__delete-btn" onClick={() => handleDeleteOrder(order?.id)}>
-          Delete
-        </button>
-      </div>
+          <div className="cta">
+            <button
+              type="button"
+              className="cta__cancel-btn"
+              onClick={() => {
+                router.back();
+              }}
+            >
+              Cancel
+            </button>
+            <button type="submit" className="cta__delete-btn" onClick={() => handleDeleteOrder(order?.id)}>
+              Delete
+            </button>
+          </div>
+        </>
+      )}
     </OrderDetailContainer>
   );
 }

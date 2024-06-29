@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import css from "styled-jsx/css";
 
 export const OrderListContainer = styled.div`
   background-color: #fff;
   border-radius: 1rem;
+  position: relative;
 
   padding: 1rem 2rem 6rem;
   border: 1px solid #d9d9d9;
@@ -10,9 +12,10 @@ export const OrderListContainer = styled.div`
   min-height: 50vh;
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 18px;
     font-weight: 500;
-    color: #2e2659;
+    color: #aca8c4;
+    margin-bottom: 3rem;
   }
 `;
 
@@ -99,6 +102,7 @@ export const HamburgerMenu = styled.div`
       width: 100%;
       text-align: left;
       border-radius: 4px;
+      cursor: pointer;
 
       &:hover {
         background: #f0f0f0;
@@ -110,4 +114,11 @@ export const HamburgerMenu = styled.div`
       }
     }
   }
+`;
+
+export const Spinner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
