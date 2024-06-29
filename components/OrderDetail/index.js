@@ -93,7 +93,7 @@ function OrderDetail() {
               <div className="detail-group__value">{order?.item}</div>
             </div>
 
-            <div className="detail-group__value">{order?.itemCost}</div>
+            <div className="detail-group__value">&#8358; {(order?.itemCost).toLocaleString()}</div>
           </div>
 
           <div className="detail-group-summary">
@@ -102,7 +102,7 @@ function OrderDetail() {
               <div className="detail-group__value">{order?.quantity} Item(s)</div>
             </div>
 
-            <div className="detail-group__value">N{order?.itemCost * order?.quantity}</div>
+            <div className="detail-group__value">&#8358; {(order?.itemCost * order?.quantity).toLocaleString()}</div>
           </div>
 
           <div className="cta">
