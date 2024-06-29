@@ -94,10 +94,10 @@ const OrderList = () => {
                   <td>{order.item}</td>
                   <td>{order.quantity}</td>
                   <td>
-                    <StatusTag>{order.paymentStatus}</StatusTag>
+                    <StatusTag $status={order.paymentStatus}>{order.paymentStatus}</StatusTag>
                   </td>
                   <td>
-                    <StatusTag>{order.status}</StatusTag>
+                    <StatusTag $status={order.status}>{order.status}</StatusTag>
                   </td>
                   <td>
                     <button onClick={() => toggleMenu(order.id)}>

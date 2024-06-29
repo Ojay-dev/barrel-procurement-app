@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import css from "styled-jsx/css";
+import styled, { css } from "styled-components";
 
 export const OrderListContainer = styled.div`
   background-color: #fff;
@@ -74,6 +73,26 @@ export const StatusTag = styled.span`
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: capitalize;
+
+  ${({ $status }) => {
+    switch ($status) {
+      case "unpaid":
+        return css`
+          background-color: #f6dfdf;
+          color: #ed3636;
+        `;
+
+      case "shipped":
+      case "paid":
+        return css`
+          background-color: #e7f5ec;
+          color: #066b26;
+        `;
+
+      default:
+        break;
+    }
+  }}
 `;
 
 export const HamburgerMenu = styled.div`
