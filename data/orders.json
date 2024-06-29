@@ -18,5 +18,27 @@
     "status": "shipped",
     "customerName": "John Doe",
     "customerAddress": "456 Main St"
+  },
+  {
+    "item": "Beauty Fair",
+    "customerName": "Wonderful",
+    "customerAddress": "Kogi State University",
+    "quantity": "20",
+    "itemCost": "5000",
+    "paymentStatus": "unpaid",
+    "status": "pending",
+    "customer": "w",
+    "address": "g",
+    "id": 3
+  },
+  {
+    "item": "Ringlight",
+    "customerName": "Ufedo Alikali",
+    "customerAddress": "Kogi State University",
+    "quantity": "10",
+    "itemCost": "20000",
+    "paymentStatus": "unpaid",
+    "status": "pending",
+    "id": 4
   }
 ]

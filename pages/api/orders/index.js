@@ -8,10 +8,10 @@ const getOrders = async (req, res) => {
 
 // POST a new order
 const createOrder = async (req, res) => {
-  const orders = await readOrdersFile(dataFilePath);
+  const orders = await readOrdersFile();
   const newOrder = { ...req.body, id: orders.length + 1 };
   orders.push(newOrder);
-  await writeOrdersFile(orders, dataFilePath);
+  await writeOrdersFile(orders);
   res.status(201).json(newOrder);
 };
 

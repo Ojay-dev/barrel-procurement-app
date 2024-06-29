@@ -4,7 +4,7 @@ export const OrderListContainer = styled.div`
   background-color: #fff;
   border-radius: 1rem;
 
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 6rem;
   border: 1px solid #d9d9d9;
   overflow-x: auto;
   min-height: 50vh;
