@@ -13,7 +13,7 @@ function EditOrderPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+      <Layout pageTitle="Dashboard / Edit Order">
         <OrderForm />
       </Layout>
     </>

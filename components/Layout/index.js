@@ -47,7 +47,7 @@ const NavMenu = [
   },
 ];
 
-const Layout = ({ children }) => {
+const Layout = ({ pageTitle = "Dashboard", children }) => {
   const router = useRouter();
 
   return (
@@ -74,7 +74,7 @@ const Layout = ({ children }) => {
       <MainContainer>
         <TopBarContainer>
           <div>
-            <h1>Dashboard</h1>
+            <h1>{pageTitle}</h1>
 
             <div className="user-section">
               <button className="user-section__notification">

@@ -13,7 +13,7 @@ function Order() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+      <Layout pageTitle="Dashboard / Order Details">
         <OrderDetail />
       </Layout>
     </>
